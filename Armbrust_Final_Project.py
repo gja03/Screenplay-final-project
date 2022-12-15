@@ -3,19 +3,158 @@
 
 # Loops, File IO, Working with external library
 
-def screenplay_final_project(): #TODO I think you want this to be a class.
+import os
+
+import docx
+
+from docx import Document
+from docx.shared import Inches
+from docx.shared import Pt
+
+error_message = 'Error. Not a valid submission. Please run program again.'
+thanks = 'Thank you.'
+
+def line_by_line():
     """
     sig: NoneType -> NoneType
     """
-    
-    import os #TODO move imports to the top of the script
+                        
+    if label=='HEAD':
+                            
+        text = text.upper()
+                            
+        paragraph = document.add_paragraph(text)
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
 
-    import docx
+        paragraph_format = paragraph.paragraph_format
 
-    from docx import Document
+    elif label=='ACTION':
 
-    error_message = 'Error. Not a valid submission. Please run program again.'
-    thanks = 'Thank you.'
+        paragraph = document.add_paragraph(text)
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+
+    elif label=='CHAR':
+
+        text = text.upper()
+
+        paragraph = document.add_paragraph(text)
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.left_indent = Inches(2.0)
+                            
+    elif label=='DIA':
+                            
+        paragraph = document.add_paragraph(text)
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+                            
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.left_indent = Inches(1.0)
+        paragraph_format.right_indent = Inches(1.5)
+
+    elif label=='PAREN':
+
+        paragraph = document.add_paragraph('(' + text + ')')
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+                            
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.left_indent = Inches(1.5)
+        paragraph_format.right_indent = Inches(2.0)
+
+    elif label=='EXTEN': #needs help
+                        
+        paragraph = document.add_paragraph(text)
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+
+    elif label=='TRAN':
+
+        text = text.upper()
+
+        paragraph = document.add_paragraph(text +':')
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+                            
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.left_indent = Inches(4.0)
+
+    elif label=='SHOT':
+
+        text = text.upper()
+
+        paragraph = document.add_paragraph(text +'-')
+        run = document.add_paragraph().add_run()
+        font = run.font
+        font.name = 'Courier'
+        font.size = Pt(12)
+
+def screenplay_format():
+    """sig: NoneType -> NoneType"""
+
+    print('We will now format your text.')
+    start_text = input('Please input the name of this text. ')
+    print(thanks)
+
+    start_text = open(start_text, 'r')
+    lines = start_text.readlines()
+    for line in lines:
+        label, text = line.split(':', 1)
+        text = text.strip()
+                      
+    ans = input('Should the screenplay be saved as a new document of appended to an old one? ')
+    print()
+                
+    if ans == 'new' or ans == 'New':
+        title = input('What is the title of the screenplay? ')
+
+        document = Document()
+        document.save(title + '.docx')
+
+        sections = document.sections
+        for section in sections:
+            section.top_margin = Inches(1.0)
+            section.bottom_margin = Inches(1.0)
+            section.left_margin = Inches(1.5)
+            section.right_margin = Inches(1.0)
+
+        line_by_line()
+
+    elif ans == 'append' or ans == 'Append':
+        print('Please make sure the file you wish to append is whithin this folder')
+
+        pre_existing_file = input ("Please input the pre-existing screenplay's filename")
+
+        document = Document(pre_existing_file)
+        document.save(pre_existing_file)
+
+        line_by_line()
+
+    else:
+        print (error_message)
+
+def screenplay_final_project():
+    """
+    sig: NoneType -> NoneType
+    """
 
     print ('Hello, Thank you for using this program.')
     print ('Please select what you would like me to do.')
@@ -89,162 +228,19 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
                 print(line)
             format_codes.close
 
-            def screenplay_format():
-                """TODO move this out and up then you can call it from within
-                your screenplay_final_project()"""
-                """sig: NoneType -> NoneType"""
-
-                from docx import Document ##TODO only need to import once.
-                from docx.shared import Inches ##TODO these can be imported together with commas "Inches, Pt"
-                from docx.shared import Pt
-
-                print('We will now format your text.')
-                start_text = input('Please input the location of this text. ')
-                print(thanks)
-
-                start_text = open(start_text, 'r')
-                lines = start_text.readlines()
-                for line in lines:
-                    label, text = line.split(':', 1)
-                    text = text.strip()
-                      
-                ans = input('Should the screenplay be saved as a new document of appended to an old one? ')
-                print()
+            
                 
-                if ans == 'new' or ans == 'New':
-                    title = input('What is the title of the screenplay? ')
-
-                    document = Document()
-                    document.save(title + '.docx')
-
-                    sections = document.sections
-                    for section in sections:
-                        section.top_margin = Inches(1.0)
-                        section.bottom_margin = Inches(1.0)
-                        section.left_margin = Inches(1.5)
-                        section.right_margin = Inches(1.0)
-
-                    def line_by_line():
-                        """This can be moved up and out as well. """
-                        
-                        if label=='HEAD': ##TODO I would look at using if/elif/else.
-
-                            text = text.upper()
-
-                            paragraph = document.add_paragraph(text) ##TODO this can be moved to above the if statements
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                            paragraph_format = paragraph.paragraph_format ##TODO then this can be placed after the if statements
-
-                        if label=='ACTION':
-
-                            paragraph = document.add_paragraph(text)
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                        if label=='CHAR':
-
-                            text = text.upper()
-
-                            paragraph = document.add_paragraph(text)
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                            paragraph_format = paragraph.paragraph_format
-                            paragraph_format.left_indent = Inches(2.0)
-
-                        if label=='DIA':
-
-                            paragraph = document.add_paragraph(text)
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                            paragraph_format = paragraph.paragraph_format
-                            paragraph_format.left_indent = Inches(1.0)
-                            paragraph_format.right_indent = Inches(1.5)
-
-                        if label=='PAREN':
-
-                            paragraph = document.add_paragraph('(' + text + ')')
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                            paragraph_format = paragraph.paragraph_format
-                            paragraph_format.left_indent = Inches(1.5)
-                            paragraph_format.right_indent = Inches(2.0)
-
-                        if label=='EXTEN': #needs help
-
-                            paragraph = document.add_paragraph(text)
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                        if label=='TRAN':
-
-                            text = text.upper()
-
-                            paragraph = document.add_paragraph(text +':')
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                            paragraph_format = paragraph.paragraph_format
-                            paragraph_format.left_indent = Inches(4.0)
-
-                        if label=='SHOT':
-
-                            text = text.upper()
-
-                            paragraph = document.add_paragraph(text +'-')
-                            run = document.add_paragraph().add_run()
-                            font = run.font
-                            font.name = 'Courier'
-                            font.size = Pt(12)
-
-                    line_by_line()
-
-                elif ans == 'append' or ans == 'Append':
-                    print('Please make sure the file you wish to append is whithin this folder')
-
-                    pre_existing_file = input ("Please input the pre-existing screenplay's filename")
-
-                    document = Document(pre_existing_file)
-                    document.save(pre_existing_file)
-
-                    line_by_line()
-
-                else:
-                    print (error_message)
-
             screenplay_format()
-
+            
         elif ans == 'no' or ans == 'No' or ans == 'N' or ans == 'n':
-
+            
             screenplay_format()
-
+            
         else:
             print (error_message)
 
     elif choice == 'c' or choice == 'C':
         print ('We will be formating a title page')
-
-        from docx import Document
-        from docx.shared import Inches
-        from docx.shared import Pt
 
         document = Document()
 
@@ -259,12 +255,21 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
         font.size = Pt(12)
 
         sections = document.sections
-            for section in sections:
-                section.top_margin = Inches(1.0)
-                section.bottom_margin = Inches(1.0)
-                section.left_margin = Inches(1.5)
-                section.right_margin = Inches(1.0)
+        for section in sections:
+            section.top_margin = Inches(1.0)
+            section.bottom_margin = Inches(1.0)
+            section.left_margin = Inches(1.5)
+            section.right_margin = Inches(1.0)
 
+        title = title.upper()
+
+        paragraph = document.add_paragraph(title)
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+        
+        
+        
 
         # Courier Font
         # Margins left 1.5 right 1.0 top & bottom 1.0
@@ -278,12 +283,12 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
             # phone number
 
 
-
-
+    
+        
 
     else:
         print (error_message)
-
-
-
+        
+    
+        
 
