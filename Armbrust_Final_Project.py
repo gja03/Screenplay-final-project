@@ -14,7 +14,7 @@ from docx.shared import Pt
 error_message = 'Error. Not a valid submission. Please run program again.'
 thanks = 'Thank you.'
 
-def line_by_line():
+def line_by_line(label, text, document):
     """
     sig: NoneType -> NoneType
     """
@@ -113,12 +113,6 @@ def screenplay_format():
     print('We will now format your text.')
     start_text = input('Please input the name of this text. ')
     print(thanks)
-
-    start_text = open(start_text, 'r')
-    lines = start_text.readlines()
-    for line in lines:
-        label, text = line.split(':', 1)
-        text = text.strip()
                       
     ans = input('Should the screenplay be saved as a new document of appended to an old one? ')
     print()
@@ -126,8 +120,13 @@ def screenplay_format():
     if ans == 'new' or ans == 'New':
         title = input('What is the title of the screenplay? ')
 
+        start_text = open(start_text, 'r')
+        lines = start_text.readlines()
+        for line in lines:
+            label, text = line.split(':', 1)
+            text = text.strip()
+
         document = Document()
-        document.save(title + '.docx')
 
         sections = document.sections
         for section in sections:
@@ -136,17 +135,26 @@ def screenplay_format():
             section.left_margin = Inches(1.5)
             section.right_margin = Inches(1.0)
 
-        line_by_line()
+        line_by_line(label, text, document)
+        
+        document.save(title + '.docx')
 
     elif ans == 'append' or ans == 'Append':
         print('Please make sure the file you wish to append is whithin this folder')
 
         pre_existing_file = input ("Please input the pre-existing screenplay's filename")
 
+        start_text = open(start_text, 'r')
+        lines = start_text.readlines()
+        for line in lines:
+            label, text = line.split(':', 1)
+            text = text.strip()
+            
         document = Document(pre_existing_file)
-        document.save(pre_existing_file)
 
-        line_by_line()
+        line_by_line(label, text, document)
+
+        document.save(pre_existing_file)
 
     else:
         print (error_message)
@@ -227,9 +235,7 @@ def screenplay_final_project():
             for line in format_codes:
                 print(line)
             format_codes.close
-
             
-                
             screenplay_format()
             
         elif ans == 'no' or ans == 'No' or ans == 'N' or ans == 'n':
@@ -292,3 +298,4 @@ def screenplay_final_project():
     
         
 
+screenplay_final_project()
