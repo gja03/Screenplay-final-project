@@ -11,24 +11,29 @@ from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.text import font
 
 error_message = 'Error. Not a valid submission. Please run program again.'
 thanks = 'Thank you.'
+
+document = Document
 
 def line_by_line(label, text, document):
     """
     sig: NoneType -> NoneType
     """
-                        
+
+    style = document.styles['Normal']
+    font = style.font
+    font.name = 'Courier'
+    font.size = Pt(12)
+                    
     if label=='HEAD':
                             
         text = text.upper()
                             
         paragraph = document.add_paragraph(text)
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
 
         paragraph_format = paragraph.paragraph_format
 
@@ -120,8 +125,7 @@ def screenplay_format():
                 
     if ans == 'new' or ans == 'New':
         title = input('What is the title of the screenplay? ')
-
-        document = Document(title + '.docx')
+        file_name = title + '.docx'
 
         sections = document.sections
         for section in sections:
@@ -130,14 +134,10 @@ def screenplay_format():
             section.left_margin = Inches(1.5)
             section.right_margin = Inches(1.0)
 
-        line_by_line(label, text, document)
-
     elif ans == 'append' or ans == 'Append':
         print('Please make sure the file you wish to append is whithin this folder')
 
-        pre_existing_file = input ("Please input the pre-existing screenplay's filename")
-            
-        document = Document(pre_existing_file)
+        file_name = input ("Please input the pre-existing screenplay's filename")
 
     else:
         print (error_message)
@@ -150,7 +150,7 @@ def screenplay_format():
             
         line_by_line(label, text, document)
         
-    document.save()
+    document.save(file_name)
             
 def screenplay_final_project():
     """
