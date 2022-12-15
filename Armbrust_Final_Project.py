@@ -121,13 +121,7 @@ def screenplay_format():
     if ans == 'new' or ans == 'New':
         title = input('What is the title of the screenplay? ')
 
-        start_text = open(start_text, 'r')
-        lines = start_text.readlines()
-        for line in lines:
-            label, text = line.split(':', 1)
-            text = text.strip()
-
-        document = Document()
+        document = Document(title + '.docx')
 
         sections = document.sections
         for section in sections:
@@ -137,29 +131,27 @@ def screenplay_format():
             section.right_margin = Inches(1.0)
 
         line_by_line(label, text, document)
-        
-        document.save(title + '.docx')
 
     elif ans == 'append' or ans == 'Append':
         print('Please make sure the file you wish to append is whithin this folder')
 
         pre_existing_file = input ("Please input the pre-existing screenplay's filename")
-
-        start_text = open(start_text, 'r')
-        lines = start_text.readlines()
-        for line in lines:
-            label, text = line.split(':', 1)
-            text = text.strip()
             
         document = Document(pre_existing_file)
-
-        line_by_line(label, text, document)
-
-        document.save(pre_existing_file)
 
     else:
         print (error_message)
 
+    start_text = open(start_text, 'r')
+    lines = start_text.readlines()
+    for line in lines:
+        label, text = line.split(':', 1)
+        text = text.strip()
+            
+        line_by_line(label, text, document)
+        
+    document.save()
+            
 def screenplay_final_project():
     """
     sig: NoneType -> NoneType
