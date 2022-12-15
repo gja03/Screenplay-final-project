@@ -1,7 +1,0 @@
-HEAD: int. Library - night
-ACTION: A man sits in a chair reading a large book. Across the room a window is pushed open by a large gust of wind. The man looks up at the window and then slowly back to his book.
-ACTION: There is silence again for a moment as the man continues reading. Then the knob on the door on the other side of the room begins to shake.
-CHAR: man
-PAREN: nervously
-DIA: Who’s there?
-ACTION: The silence is deafening.
