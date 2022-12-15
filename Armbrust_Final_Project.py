@@ -127,17 +127,17 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
                     def line_by_line():
                         """This can be moved up and out as well. """
                         
-                        if label=='HEAD':
+                        if label=='HEAD': ##TODO I would look at using case instead of the ifs
                             
                             text = text.upper()
                             
-                            paragraph = document.add_paragraph(text)
+                            paragraph = document.add_paragraph(text) ##TODO this can be moved to above the if statements
                             run = document.add_paragraph().add_run()
                             font = run.font
                             font.name = 'Courier'
                             font.size = Pt(12)
 
-                            paragraph_format = paragraph.paragraph_format
+                            paragraph_format = paragraph.paragraph_format ##TODO then this can be placed after the if statements
 
                         if label=='ACTION':
 
