@@ -127,10 +127,10 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
                     def line_by_line():
                         """This can be moved up and out as well. """
                         
-                        if label=='HEAD': ##TODO I would look at using case instead of the ifs
-                            
+                        if label=='HEAD': ##TODO I would look at using if/elif/else.
+
                             text = text.upper()
-                            
+
                             paragraph = document.add_paragraph(text) ##TODO this can be moved to above the if statements
                             run = document.add_paragraph().add_run()
                             font = run.font
@@ -159,15 +159,15 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
 
                             paragraph_format = paragraph.paragraph_format
                             paragraph_format.left_indent = Inches(2.0)
-                            
+
                         if label=='DIA':
-                            
+
                             paragraph = document.add_paragraph(text)
                             run = document.add_paragraph().add_run()
                             font = run.font
                             font.name = 'Courier'
                             font.size = Pt(12)
-                            
+
                             paragraph_format = paragraph.paragraph_format
                             paragraph_format.left_indent = Inches(1.0)
                             paragraph_format.right_indent = Inches(1.5)
@@ -179,13 +179,13 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
                             font = run.font
                             font.name = 'Courier'
                             font.size = Pt(12)
-                            
+
                             paragraph_format = paragraph.paragraph_format
                             paragraph_format.left_indent = Inches(1.5)
                             paragraph_format.right_indent = Inches(2.0)
 
                         if label=='EXTEN': #needs help
-                        
+
                             paragraph = document.add_paragraph(text)
                             run = document.add_paragraph().add_run()
                             font = run.font
@@ -201,7 +201,7 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
                             font = run.font
                             font.name = 'Courier'
                             font.size = Pt(12)
-                            
+
                             paragraph_format = paragraph.paragraph_format
                             paragraph_format.left_indent = Inches(4.0)
 
@@ -229,13 +229,13 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
 
                 else:
                     print (error_message)
-                
+
             screenplay_format()
-            
+
         elif ans == 'no' or ans == 'No' or ans == 'N' or ans == 'n':
-            
+
             screenplay_format()
-            
+
         else:
             print (error_message)
 
@@ -264,7 +264,7 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
                 section.bottom_margin = Inches(1.0)
                 section.left_margin = Inches(1.5)
                 section.right_margin = Inches(1.0)
-        
+
 
         # Courier Font
         # Margins left 1.5 right 1.0 top & bottom 1.0
@@ -278,12 +278,12 @@ def screenplay_final_project(): #TODO I think you want this to be a class.
             # phone number
 
 
-    
-        
+
+
 
     else:
         print (error_message)
-        
-    
-        
+
+
+
 
