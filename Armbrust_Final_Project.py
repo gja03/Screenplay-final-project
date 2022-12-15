@@ -3,12 +3,12 @@
 
 # Loops, File IO, Working with external library
 
-def screenplay_final_project():
+def screenplay_final_project(): #TODO I think you want this to be a class.
     """
     sig: NoneType -> NoneType
     """
     
-    import os
+    import os #TODO move imports to the top of the script
 
     import docx
 
@@ -90,10 +90,12 @@ def screenplay_final_project():
             format_codes.close
 
             def screenplay_format():
+                """TODO move this out and up then you can call it from within
+                your screenplay_final_project()"""
                 """sig: NoneType -> NoneType"""
 
-                from docx import Document
-                from docx.shared import Inches
+                from docx import Document ##TODO only need to import once.
+                from docx.shared import Inches ##TODO these can be imported together with commas "Inches, Pt"
                 from docx.shared import Pt
 
                 print('We will now format your text.')
@@ -123,6 +125,7 @@ def screenplay_final_project():
                         section.right_margin = Inches(1.0)
 
                     def line_by_line():
+                        """This can be moved up and out as well. """
                         
                         if label=='HEAD':
                             
