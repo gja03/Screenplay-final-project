@@ -10,6 +10,7 @@ import docx
 from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 error_message = 'Error. Not a valid submission. Please run program again.'
 thanks = 'Thank you.'
