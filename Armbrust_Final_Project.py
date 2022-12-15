@@ -16,7 +16,7 @@ from docx.text import font
 error_message = 'Error. Not a valid submission. Please run program again.'
 thanks = 'Thank you.'
 
-document = Document
+document = Document()
 
 def line_by_line(label, text, document):
     """
@@ -40,20 +40,14 @@ def line_by_line(label, text, document):
     elif label=='ACTION':
 
         paragraph = document.add_paragraph(text)
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
 
     elif label=='CHAR':
 
         text = text.upper()
 
         paragraph = document.add_paragraph(text)
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
 
         paragraph_format = paragraph.paragraph_format
         paragraph_format.left_indent = Inches(2.0)
@@ -61,10 +55,7 @@ def line_by_line(label, text, document):
     elif label=='DIA':
                             
         paragraph = document.add_paragraph(text)
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
                             
         paragraph_format = paragraph.paragraph_format
         paragraph_format.left_indent = Inches(1.0)
@@ -73,10 +64,7 @@ def line_by_line(label, text, document):
     elif label=='PAREN':
 
         paragraph = document.add_paragraph('(' + text + ')')
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
                             
         paragraph_format = paragraph.paragraph_format
         paragraph_format.left_indent = Inches(1.5)
@@ -85,20 +73,14 @@ def line_by_line(label, text, document):
     elif label=='EXTEN': #needs help
                         
         paragraph = document.add_paragraph(text)
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
 
     elif label=='TRAN':
 
         text = text.upper()
 
         paragraph = document.add_paragraph(text +':')
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
                             
         paragraph_format = paragraph.paragraph_format
         paragraph_format.left_indent = Inches(4.0)
@@ -108,10 +90,7 @@ def line_by_line(label, text, document):
         text = text.upper()
 
         paragraph = document.add_paragraph(text +'-')
-        run = document.add_paragraph().add_run()
-        font = run.font
-        font.name = 'Courier'
-        font.size = Pt(12)
+        paragraph.style = document.styles['Normal']
 
 def screenplay_format():
     """sig: NoneType -> NoneType"""
