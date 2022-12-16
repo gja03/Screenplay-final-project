@@ -1,7 +1,15 @@
 # Greta Armbrust
 # Final Project
+# Comp112-01
 
-# Loops, File IO, Working with external library
+"""
+1. Flow Control, File IO, Working with external library
+
+2. I believe that through the completion of this code I have shown that I have a good grasp of basic concepts like loops which we learned early on as well as the ability to add to that knowledge through the learning of an external dictionary.
+    While I believe that mastery may be being generous I certainly have a good grasp on it and would feel comfortable creating more things in python particularly those which can be aligned with my other interests.
+
+3. In this class I have learned a good amount of introductory python as well as developing an ability to expand on the knowledge should I wish
+"""
 
 import os
 
@@ -18,15 +26,17 @@ thanks = 'Thank you.'
 
 document = Document()
 
+style = document.styles['Normal']
+font = style.font
+font.name = 'Courier'
+font.size = Pt(12)
+
 def line_by_line(label, text, document):
     """
-    sig: NoneType -> NoneType
-    """
+    sig: str (three of them) -> NoneType
 
-    style = document.styles['Normal']
-    font = style.font
-    font.name = 'Courier'
-    font.size = Pt(12)
+    Takes the labelled text and prints it into the doc properly formatted
+    """
                     
     if label=='HEAD':
                             
@@ -70,11 +80,6 @@ def line_by_line(label, text, document):
         paragraph_format.left_indent = Inches(1.5)
         paragraph_format.right_indent = Inches(2.0)
 
-    elif label=='EXTEN': #needs help
-                        
-        paragraph = document.add_paragraph(text)
-        paragraph.style = document.styles['Normal']
-
     elif label=='TRAN':
 
         text = text.upper()
@@ -93,7 +98,10 @@ def line_by_line(label, text, document):
         paragraph.style = document.styles['Normal']
 
 def screenplay_format():
-    """sig: NoneType -> NoneType"""
+    """
+    sig: NoneType -> NoneType
+    sets up the text and document and either creates a new one of adds to a pre-existing one.
+    """
 
     print('We will now format your text.')
     start_text = input('Please input the name of this text. ')
@@ -134,6 +142,7 @@ def screenplay_format():
 def screenplay_final_project():
     """
     sig: NoneType -> NoneType
+    this function creates the structure of the code and contains the full first and third segment which allows the user to look up information and to create a title page 
     """
 
     print ('Hello, Thank you for using this program.')
@@ -144,7 +153,7 @@ def screenplay_final_project():
     choice = input ('Type the letter of your choice here: ')
     print()
 
-    if choice == 'a' or choice == 'A' : # see if there is a way to allow it to repeat until a user chooses to quit
+    if choice == 'a' or choice == 'A' : 
         element = input ('What element would you like formatting info for? ')
         print()
         
@@ -174,11 +183,6 @@ def screenplay_final_project():
             print('Placed between charater name and dialogue')
             print('Indent 1.5" on the left and 2" on the right')
             print (sentence_case)
-        elif element == 'Extension':
-            print('Placed after character name in parentheses to tell how a voice is heard')
-            print('Example:')
-            print('FRANK (V.O.)')
-            print ("This means that Frank's voice is heard in voice-over")
         elif element == 'Transition':
             print('These are editing directions')
             print(shooting_script)
@@ -220,21 +224,15 @@ def screenplay_final_project():
     elif choice == 'c' or choice == 'C':
         print ('We will be formating a title page')
 
-        document = Document()
-
         title = input('What is the title of the screenplay this page is for? ')
 
-        document.save(title + 'Title Page.docx')
-
-        run = document.add_paragraph().add_run()
-        font = run.font
-
-        font.name = 'Courier'
-        font.size = Pt(12)
+        file_name = title + ' Title Page.docx'
+        
+        document.save(file_name)
 
         sections = document.sections
         for section in sections:
-            section.top_margin = Inches(1.0)
+            section.top_margin = Inches(4.0)
             section.bottom_margin = Inches(1.0)
             section.left_margin = Inches(1.5)
             section.right_margin = Inches(1.0)
@@ -242,32 +240,56 @@ def screenplay_final_project():
         title = title.upper()
 
         paragraph = document.add_paragraph(title)
+        paragraph.style = document.styles['Normal']
         paragraph_format = paragraph.paragraph_format
         paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
+        paragraph = document.add_paragraph()
+
+
+        paragraph = document.add_paragraph('written by')
+        paragraph.style = document.styles['Normal']
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+        name = input ('What is your name? ')
+
+        paragraph = document.add_paragraph(name)
+        paragraph.style = document.styles['Normal']
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+        paragraph = document.add_paragraph('\r')
+        paragraph = document.add_paragraph('\r')
+        paragraph = document.add_paragraph('\r')
+        paragraph = document.add_paragraph('\r')
+        paragraph = document.add_paragraph('\r')
+        paragraph = document.add_paragraph('\r')
+
+        email = input ('What is your email? ')
+
+        paragraph = document.add_paragraph(email)
+        paragraph.style = document.styles['Normal']
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+        phone = input ('What is your phone number? ')
         
+        paragraph = document.add_paragraph(phone)
+        paragraph.style = document.styles['Normal']
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+        contact = input ('Please put any additional lines of contact information here. ')
+
+        paragraph = document.add_paragraph(contact)
+        paragraph.style = document.styles['Normal']
+        paragraph_format = paragraph.paragraph_format
+        paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+        document.save(file_name)
         
-        
-
-        # Courier Font
-        # Margins left 1.5 right 1.0 top & bottom 1.0
-        # Title: All caps centered horizontally, 20-22 lines down (4" from top of page)
-        # By-line: 2/4 lines below Title, "by" or "written by"
-        # Name: 1 line below
-
-        # Bottom part:
-            # company name
-            # email
-            # phone number
-
-
-    
-        
-
     else:
         print (error_message)
         
-    
-        
-
 screenplay_final_project()
